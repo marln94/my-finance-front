@@ -5,13 +5,14 @@ import {
   ReferenceField,
   TextInput,
 } from "react-admin";
+import { AccountFilterSidebar } from "./AccountFilterSidebar";
 
 const postFilters = [
   <TextInput key="af1" label="Search" source="name@ilike" alwaysOn />,
 ];
 
 export const AccountList = () => (
-  <List filters={postFilters} perPage={50}>
+  <List filters={postFilters} perPage={50} aside={<AccountFilterSidebar />}>
     <DataTable>
       <DataTable.Col source="id" />
       <DataTable.Col source="name" />
