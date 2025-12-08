@@ -15,6 +15,7 @@ import Banks from "./crud/bank";
 import CreditCards from "./crud/credit_card";
 import Journals from "./crud/journal";
 import UsdExchangeRates from "./crud/usd_exchange_rate";
+import JournalEntry from "./crud/journal_entry";
 
 const auth0 = new Auth0Client({
   domain: import.meta.env.VITE_AUTH0_DOMAIN,
@@ -31,7 +32,7 @@ const authProvider = Auth0AuthProvider(auth0, {
 });
 
 const config: IDataProviderConfig = {
-  apiUrl: "http://localhost:3000",
+  apiUrl: import.meta.env.VITE_POSTGREST_URL,
   httpClient: httpClient(auth0),
   defaultListOp: "eq",
   primaryKeys: defaultPrimaryKeys,
@@ -46,10 +47,11 @@ export const App = () => (
       dataProvider={postgrestRestProvider(config)}
       dashboard={Dashboard}
     >
+      <Resource {...Journals} />
+      <Resource {...JournalEntry} />
       <Resource {...Accounts} />
       <Resource {...Banks} />
       <Resource {...CreditCards} />
-      <Resource {...Journals} />
       <Resource {...UsdExchangeRates} />
     </Admin>
   </BrowserRouter>
