@@ -58,6 +58,15 @@ export const JournalEntryList = () => (
           <TextField source="side" />
           {" | "}
           <ReferenceField
+            source="account_id"
+            reference="accounts"
+            record={record}
+            link={false}
+          >
+            <TextField source="name" />
+          </ReferenceField>
+          {" | "}
+          <ReferenceField
             source="tag_id"
             reference="tags"
             record={record}
