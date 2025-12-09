@@ -28,6 +28,7 @@ const filters = [
 export const JournalEntryList = () => (
   <InfiniteList
     filters={filters}
+    sort={{ field: "created_at", order: "DESC" }}
     queryOptions={{ meta: { prefetch: ["journals"] } }}
   >
     <SimpleList
