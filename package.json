@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.4.1",
+    "@date-fns/utc": "^2.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "@raphiniert/ra-data-postgrest": "^2.5.1",
+    "date-fns": "^4.1.0",
     "ra-auth-auth0": "^2.0.1",
     "ra-data-json-server": "^5.11.0",
     "react": "^19.0.0",

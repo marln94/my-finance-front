@@ -1,30 +1,34 @@
-import {
-  DateInput,
-  Edit,
-  NumberInput,
-  ReferenceInput,
-  SimpleForm,
-  TextInput,
-} from "react-admin";
+import { Edit, NumberInput, SimpleForm, TextInput } from "react-admin";
+import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput";
 
 export const JournalEntryEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" />
-      <ReferenceInput source="journal_id" reference="journals" />
-      <ReferenceInput source="account_id" reference="accounts" />
-      <ReferenceInput source="tag_id" reference="tags" />
+      <CustomReferenceInput
+        source="journal_id"
+        reference="journals"
+        filter="journal_number"
+        label="journal_number"
+      />
+      <CustomReferenceInput
+        source="account_id"
+        reference="accounts"
+        filter="name@ilike"
+      />
+      <CustomReferenceInput
+        source="tag_id"
+        reference="tags"
+        filter="name@ilike"
+      />
       <NumberInput source="amount" />
       <TextInput source="side" />
       <TextInput source="description" />
-      <TextInput source="reference" />
-      <TextInput source="metadata" />
-      <ReferenceInput
+      <CustomReferenceInput
         source="exchange_rate_id"
         reference="usd_exchange_rates"
+        filter="rate"
+        label="rate"
       />
-      <DateInput source="created_at" />
-      <DateInput source="updated_at" />
     </SimpleForm>
   </Edit>
 );

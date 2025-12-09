@@ -5,13 +5,15 @@ export const CustomReferenceInput = ({
   reference,
   filter,
   label,
+  alwaysOn,
 }: {
   source: string;
   reference: string;
   filter: string;
   label?: string;
+  alwaysOn?: boolean;
 }) => (
-  <ReferenceInput source={source} reference={reference}>
+  <ReferenceInput source={source} reference={reference} alwaysOn={alwaysOn}>
     <AutocompleteInput
       optionText={label}
       filterToQuery={(searchText) => ({ [filter]: searchText })}

@@ -1,27 +1,72 @@
-import { DataTable, List, ReferenceField } from "react-admin";
+import {
+  InfiniteList,
+  ReferenceField,
+  SearchInput,
+  SimpleList,
+  TextField,
+} from "react-admin";
+import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput";
+import { formatMoney } from "../../utils";
+
+const filters = [
+  <CustomReferenceInput
+    source="journal_id"
+    reference="journals"
+    filter="journal_number"
+    label="journal_number"
+    key="journal_id"
+    alwaysOn
+  />,
+  <SearchInput
+    source="description@ilike"
+    key="description"
+    alwaysOn
+    placeholder="Buscar descripción"
+  />,
+];
 
 export const JournalEntryList = () => (
-  <List>
-    <DataTable>
-      <DataTable.Col source="journal_id">
-        <ReferenceField source="journal_id" reference="journals" />
-      </DataTable.Col>
-      <DataTable.Col source="account_id">
-        <ReferenceField source="account_id" reference="accounts" />
-      </DataTable.Col>
-      <DataTable.Col source="tag_id">
-        <ReferenceField source="tag_id" reference="tags" />
-      </DataTable.Col>
-      <DataTable.NumberCol source="amount" />
-      <DataTable.Col source="side" />
-      <DataTable.Col source="description" />
-      <DataTable.Col source="reference" />
-      <DataTable.Col source="exchange_rate_id">
+  <InfiniteList
+    filters={filters}
+    queryOptions={{ meta: { prefetch: ["journals"] } }}
+  >
+    <SimpleList
+      primaryText={(record) => (
         <ReferenceField
-          source="exchange_rate_id"
-          reference="usd_exchange_rates"
-        />
-      </DataTable.Col>
-    </DataTable>
-  </List>
+          source="journal_id"
+          reference="journals"
+          record={record}
+          link={false}
+        >
+          #<TextField source="journal_number" />
+          {" - "}
+          <TextField source="description" />
+        </ReferenceField>
+      )}
+      secondaryText={(record) => (
+        <>
+          <ReferenceField
+            source="journal_id"
+            reference="journals"
+            record={record}
+            link={false}
+          >
+            <TextField source="date" />
+          </ReferenceField>
+          {" | "}
+          <TextField source="side" />
+          {" | "}
+          <ReferenceField
+            source="tag_id"
+            reference="tags"
+            record={record}
+            link={false}
+          >
+            <TextField source="name" />
+          </ReferenceField>
+        </>
+      )}
+      tertiaryText={(record) => formatMoney(record.amount)}
+    />
+  </InfiniteList>
 );
