@@ -16,6 +16,7 @@ import CreditCards from "./crud/credit_card";
 import Journals from "./crud/journal";
 import UsdExchangeRates from "./crud/usd_exchange_rate";
 import JournalEntry from "./crud/journal_entry";
+import Tags from "./crud/tag";
 
 const auth0 = new Auth0Client({
   domain: import.meta.env.VITE_AUTH0_DOMAIN,
@@ -50,6 +51,7 @@ export const App = () => (
       <Resource {...Journals} />
       <Resource {...JournalEntry} />
       <Resource {...Accounts} />
+      <Resource {...Tags} />
       <Resource {...Banks} />
       <Resource {...CreditCards} />
       <Resource {...UsdExchangeRates} />
