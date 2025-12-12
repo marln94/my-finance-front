@@ -17,6 +17,10 @@ import Journals from "./crud/journal";
 import UsdExchangeRates from "./crud/usd_exchange_rate";
 import JournalEntry from "./crud/journal_entry";
 import Tags from "./crud/tag";
+import Budgets from "./crud/budget";
+import BudgetCategories from "./crud/budget_category";
+import BudgetEntries from "./crud/budget_entry";
+import Transactions from "./crud/transaction";
 
 const auth0 = new Auth0Client({
   domain: import.meta.env.VITE_AUTH0_DOMAIN,
@@ -48,6 +52,7 @@ export const App = () => (
       dataProvider={postgrestRestProvider(config)}
       dashboard={Dashboard}
     >
+      <Resource {...Transactions} />
       <Resource {...Journals} />
       <Resource {...JournalEntry} />
       <Resource {...Accounts} />
@@ -55,6 +60,9 @@ export const App = () => (
       <Resource {...Banks} />
       <Resource {...CreditCards} />
       <Resource {...UsdExchangeRates} />
+      <Resource {...Budgets} />
+      <Resource {...BudgetCategories} />
+      <Resource {...BudgetEntries} />
     </Admin>
   </BrowserRouter>
 );

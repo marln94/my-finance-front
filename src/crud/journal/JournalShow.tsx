@@ -1,7 +1,6 @@
 import {
   ArrayField,
   DateField,
-  List,
   NumberField,
   ReferenceField,
   Show,
@@ -26,51 +25,48 @@ export const JournalShow = () => (
       />
     </SimpleShowLayout>
 
-    <List>
-      <ArrayField source="journal_entries">
-        <SimpleList
-          primaryText={(record) => (
+    <ArrayField source="journal_entries">
+      <SimpleList
+        primaryText={(record) => (
+          <ReferenceField
+            source="journal_id"
+            reference="journals"
+            record={record}
+            link={false}
+          >
+            #<TextField source="journal_number" />
+            {" - "}
+            <TextField source="description" />
+          </ReferenceField>
+        )}
+        secondaryText={(record) => (
+          <>
             <ReferenceField
               source="journal_id"
               reference="journals"
               record={record}
               link={false}
             >
-              #<TextField source="journal_number" />
-              {" - "}
-              <TextField source="description" />
+              <TextField source="date" />
             </ReferenceField>
-          )}
-          secondaryText={(record) => (
-            <>
-              <ReferenceField
-                source="journal_id"
-                reference="journals"
-                record={record}
-                link={false}
-              >
-                <TextField source="date" />
-              </ReferenceField>
-              {" | "}
-              <TextField source="side" />
-              {" | "}
-              <ReferenceField
-                source="tag_id"
-                reference="tags"
-                record={record}
-                link={false}
-              >
-                <TextField source="name" />
-              </ReferenceField>
-            </>
-          )}
-          tertiaryText={(record) => formatMoney(record.amount)}
-          rowClick={(id, resource, record) => {
-            console.log(id, resource, record);
-            return `/journal_entries/${id}/show`;
-          }}
-        />
-      </ArrayField>
-    </List>
+            {" | "}
+            <TextField source="side" />
+            {" | "}
+            <ReferenceField
+              source="tag_id"
+              reference="tags"
+              record={record}
+              link={false}
+            >
+              <TextField source="name" />
+            </ReferenceField>
+          </>
+        )}
+        tertiaryText={(record) => formatMoney(record.amount)}
+        rowClick={(id) => {
+          return `/journal_entries/${id}/show`;
+        }}
+      />
+    </ArrayField>
   </Show>
 );

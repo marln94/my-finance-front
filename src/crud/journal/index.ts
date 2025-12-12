@@ -6,6 +6,9 @@ import { JournalCreate } from "./JournalCreate";
 
 export default {
   name: "journals",
+  options: {
+    label: "Partidas",
+  },
   list: JournalList,
   edit: JournalEdit,
   show: JournalShow,

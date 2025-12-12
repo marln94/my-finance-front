@@ -6,6 +6,7 @@ import { JournalEntryCreate } from "./JournalEntryCreate";
 
 export default {
   name: "journal_entries",
+  options: { label: "Línea de partidas" },
   list: JournalEntryList,
   edit: JournalEntryEdit,
   show: JournalEntryShow,

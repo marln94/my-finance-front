@@ -4,8 +4,11 @@ import {TagShow} from "./TagShow.tsx";
 import {TagEdit} from "./TagEdit.tsx";
 import {BankCreate} from "./TagCreate.tsx";
 
+import Sell from '@mui/icons-material/Sell'
+
 export default {
 	name: "tags",
+	icon: Sell,
 	list: TagList,
 	edit: TagEdit,
 	show: TagShow,
