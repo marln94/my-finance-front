@@ -8,7 +8,7 @@ import {
 
 export const JournalList = () => (
   <InfiniteList
-    sort={{ field: "journal_number", order: "DESC" }}
+    sort={{ field: "date", order: "DESC" }}
     queryOptions={{ meta: { embed: ["journal_entries"] } }}
   >
     <SimpleList
