@@ -4,11 +4,22 @@ import {
   DataTable,
   List,
   ReferenceField,
+  SearchInput,
   SingleFieldList,
 } from "react-admin";
 
+const filters = [
+  <SearchInput
+    source="description@ilike"
+    key="description"
+    alwaysOn
+    placeholder="Buscar descripción"
+  />,
+];
+
 export const TransactionList = () => (
   <List
+    filters={filters}
     sort={{ field: "date", order: "DESC" }}
     queryOptions={{ meta: { embed: ["journals"] } }}
   >
@@ -16,7 +27,6 @@ export const TransactionList = () => (
       <DataTable.Col source="id" />
       <DataTable.Col source="date" />
       <DataTable.Col source="description" />
-      <DataTable.Col source="reference" />
       <DataTable.Col source="journals">
         <ArrayField source={"journals"}>
           <SingleFieldList>
@@ -26,6 +36,7 @@ export const TransactionList = () => (
           </SingleFieldList>
         </ArrayField>
       </DataTable.Col>
+      <DataTable.Col source="reference" />
     </DataTable>
   </List>
 );
