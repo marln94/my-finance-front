@@ -1,18 +1,15 @@
-import {BooleanInput, Create, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {
+  Create,
+  DateInput,
+  SimpleForm,
+  TextInput,
+} from "react-admin";
 
 export const TransactionCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="name" />
+      <DateInput source="date" />
       <TextInput source="description" />
-      <BooleanInput source="is_active" />
-      <SelectInput
-        source="side"
-        choices={[
-          { id: "debe", name: "Debe" },
-          { id: "haber", name: "Haber" },
-        ]}
-      />
     </SimpleForm>
   </Create>
 );
