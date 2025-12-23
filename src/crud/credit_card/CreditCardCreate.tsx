@@ -1,6 +1,5 @@
 import {
   BooleanInput,
-  DateInput,
   Create,
   SimpleForm,
   TextInput,
@@ -29,7 +28,7 @@ export const CreditCardCreate = () => {
           filter="name@ilike"
         />
         <TextInput source="holder_name" />
-        <DateInput source="last_digits" />
+        <TextInput source="last_digits" />
         <BooleanInput source="is_active" />
         <TextInput source="description" />
       </SimpleForm>

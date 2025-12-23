@@ -4,9 +4,20 @@ import {
   ReferenceArrayField,
   ReferenceField,
 } from "react-admin";
+import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput.tsx";
+
+const filters = [
+  <CustomReferenceInput
+    source="budget_id"
+    reference="budgets"
+    filter="budget_id"
+    key="budget_id"
+    alwaysOn
+  />
+];
 
 export const BudgetEntryList = () => (
-  <List>
+  <List filters={filters}>
     <DataTable>
       <DataTable.Col source="name" />
       <DataTable.Col source="amount" />

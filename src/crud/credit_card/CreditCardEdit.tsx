@@ -1,24 +1,16 @@
 import {
   BooleanInput,
-  DateInput,
   Edit,
   SimpleForm,
   TextInput,
-  useUpdate,
 } from "react-admin";
 
-import { injectUpdateAt } from "../../utils";
 import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput";
 
 export const CreditCardEdit = () => {
-  const [update] = useUpdate();
-  const handleUpdate = (credit_card: object) => {
-    update("credit_cards", injectUpdateAt(credit_card));
-  };
-
   return (
     <Edit>
-      <SimpleForm onSubmit={handleUpdate}>
+      <SimpleForm >
         <CustomReferenceInput
           source="bank_id"
           reference="banks"
@@ -36,7 +28,7 @@ export const CreditCardEdit = () => {
           filter="name@ilike"
         />
         <TextInput source="holder_name" />
-        <DateInput source="last_digits" />
+        <TextInput source="last_digits" />
         <BooleanInput source="is_active" />
         <TextInput source="description" />
       </SimpleForm>
