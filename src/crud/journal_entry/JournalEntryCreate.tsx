@@ -8,7 +8,7 @@ export const JournalEntryCreate = () => (
         source="journal_id"
         reference="journals"
         filter="journal_number"
-        label="journal_number"
+        label={(record) => `#${record.journal_number} - ${record.description}`}
       />
       <CustomReferenceInput
         source="account_id"

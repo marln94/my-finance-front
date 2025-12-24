@@ -9,7 +9,13 @@ import {
 export const JournalEntryShow = () => (
   <Show>
     <SimpleShowLayout>
-      <ReferenceField source="journal_id" reference="journals" />
+      <ReferenceField
+        source="journal_id"
+        reference="journals"
+        render={(record) =>
+          `#${record.referenceRecord?.journal_number} - ${record.referenceRecord?.description}`
+        }
+      />
       <ReferenceField source="account_id" reference="accounts" />
       <ReferenceField source="tag_id" reference="tags" />
       <NumberField source="amount" />

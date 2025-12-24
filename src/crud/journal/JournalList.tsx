@@ -1,12 +1,13 @@
 import {
   ArrayField,
-  ChipField,
+  FunctionField,
   InfiniteList,
   SearchInput,
   SimpleList,
   SingleFieldList,
 } from "react-admin";
 import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput.tsx";
+import { Chip } from "@mui/material";
 
 const filters = [
   <CustomReferenceInput
@@ -33,8 +34,8 @@ const filters = [
 export const JournalList = () => (
   <InfiniteList
     filters={filters}
-    sort={{ field: "date", order: "DESC" }}
-    queryOptions={{ meta: { embed: ["journal_entries"] } }}
+    sort={{ field: "journal_number", order: "DESC" }}
+    queryOptions={{ meta: { embed: ["journal_entries(*, accounts(*))"] } }}
   >
     <SimpleList
       primaryText={(record) =>
@@ -43,8 +44,23 @@ export const JournalList = () => (
       secondaryText={(record) => `${record.date} | ${record.statement}`}
       tertiaryText={() => (
         <ArrayField source="journal_entries">
-          <SingleFieldList>
-            <ChipField source="amount" />
+          <SingleFieldList linkType={false}>
+            <FunctionField
+              render={(record) => (
+                <Chip
+                  label={`${record.accounts.name} L.${record.amount}`}
+                  sx={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    "& .MuiChip-label": {
+                      display: "block",
+                      whiteSpace: "normal",
+                      wordBreak: "break-word",
+                    },
+                  }}
+                />
+              )}
+            />
           </SingleFieldList>
         </ArrayField>
       )}

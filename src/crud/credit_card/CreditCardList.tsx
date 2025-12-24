@@ -1,7 +1,6 @@
 import {
   BooleanField,
   DataTable,
-  DateField,
   List,
   ReferenceField,
 } from "react-admin";
@@ -21,19 +20,11 @@ export const CreditCardList = () => (
         <ReferenceField source="account_usd_id" reference="accounts" />
       </DataTable.Col>
       <DataTable.Col source="holder_name" />
-      <DataTable.Col source="last_digits">
-        <DateField source="last_digits" />
-      </DataTable.Col>
+      <DataTable.Col source="last_digits"/>
       <DataTable.Col source="is_active">
         <BooleanField source="is_active" />
       </DataTable.Col>
       <DataTable.Col source="description" />
-      <DataTable.Col source="created_at">
-        <DateField source="created_at" />
-      </DataTable.Col>
-      <DataTable.Col source="updated_at">
-        <DateField source="updated_at" />
-      </DataTable.Col>
     </DataTable>
   </List>
 );

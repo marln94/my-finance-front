@@ -6,13 +6,14 @@ import {
   SimpleForm,
   TextInput,
 } from "react-admin";
+import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput.tsx";
 
 export const JournalCreate = () => (
   <Create>
     <SimpleForm>
       <TextInput source="id" />
       <NumberInput source="journal_number" />
-      <ReferenceInput source="transaction_id" reference="transactions" />
+      <CustomReferenceInput source={"transaction_id"} reference={"transactions"} filter={"id"}/>
       <TextInput source="description" />
       <DateInput source="date" />
       <TextInput source="statement" />
@@ -22,8 +23,6 @@ export const JournalCreate = () => (
         source="email_transaction_id"
         reference="email_transactions"
       />
-      <DateInput source="created_at" />
-      <DateInput source="updated_at" />
     </SimpleForm>
   </Create>
 );

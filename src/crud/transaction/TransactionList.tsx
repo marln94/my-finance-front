@@ -1,6 +1,5 @@
 import {
   ArrayField,
-  ChipField,
   DataTable,
   List,
   ReferenceField,
@@ -20,7 +19,7 @@ const filters = [
 export const TransactionList = () => (
   <List
     filters={filters}
-    sort={{ field: "date", order: "DESC" }}
+    sort={{ field: "id", order: "DESC" }}
     queryOptions={{ meta: { embed: ["journals"] } }}
   >
     <DataTable>
@@ -30,9 +29,13 @@ export const TransactionList = () => (
       <DataTable.Col source="journals">
         <ArrayField source={"journals"}>
           <SingleFieldList>
-            <ReferenceField reference={"journals"} source={"id"}>
-              <ChipField source={"journal_number"} />
-            </ReferenceField>
+            <ReferenceField
+              reference={"journals"}
+              source={"id"}
+              render={(record) =>
+                `#${record.referenceRecord?.journal_number} - ${record.referenceRecord?.description}`
+              }
+            ></ReferenceField>
           </SingleFieldList>
         </ArrayField>
       </DataTable.Col>

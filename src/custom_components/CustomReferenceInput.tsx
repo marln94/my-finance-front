@@ -10,7 +10,7 @@ export const CustomReferenceInput = ({
   source: string;
   reference: string;
   filter: string;
-  label?: string;
+  label?: string | ((record: any) => string);
   alwaysOn?: boolean;
 }) => (
   <ReferenceInput source={source} reference={reference} alwaysOn={alwaysOn}>

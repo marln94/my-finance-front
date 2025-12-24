@@ -24,7 +24,7 @@ export const TransactionShow = () => (
               record={record}
               link={false}
             >
-              Partida #<TextField source="journal_number" />
+              #<TextField source="journal_number" />
               {" - "}
               <TextField source="description" />
             </ReferenceField>

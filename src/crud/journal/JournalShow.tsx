@@ -1,7 +1,6 @@
 import {
   ArrayField,
   DateField,
-  NumberField,
   ReferenceField,
   Show,
   SimpleList,
@@ -11,9 +10,9 @@ import {
 import { formatMoney } from "../../utils";
 
 export const JournalShow = () => (
-  <Show queryOptions={{ meta: { embed: ["journal_entries"] } }}>
+  <Show queryOptions={{ meta: { embed: ["journal_entries(*, accounts(*))"] } }}>
     <SimpleShowLayout>
-      <NumberField source="journal_number" />
+      <TextField source="journal_number" />
       <ReferenceField source="transaction_id" reference="transactions" />
       <TextField source="description" />
       <DateField source="date" />
@@ -34,9 +33,9 @@ export const JournalShow = () => (
             record={record}
             link={false}
           >
-            #<TextField source="journal_number" />
-            {" - "}
-            <TextField source="description" />
+            <TextField source="description" record={record} />
+            <br/>
+            <TextField source="name" record={record.accounts} />
           </ReferenceField>
         )}
         secondaryText={(record) => (
