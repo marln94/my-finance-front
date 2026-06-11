@@ -1,7 +1,7 @@
 import {
   ArrayField,
   DataTable,
-  List,
+  InfiniteList,
   ReferenceField,
   SearchInput,
   SingleFieldList,
@@ -17,7 +17,7 @@ const filters = [
 ];
 
 export const TransactionList = () => (
-  <List
+  <InfiniteList
     filters={filters}
     sort={{ field: "id", order: "DESC" }}
     queryOptions={{ meta: { embed: ["journals"] } }}
@@ -39,7 +39,6 @@ export const TransactionList = () => (
           </SingleFieldList>
         </ArrayField>
       </DataTable.Col>
-      <DataTable.Col source="reference" />
     </DataTable>
-  </List>
+  </InfiniteList>
 );

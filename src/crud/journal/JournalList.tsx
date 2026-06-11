@@ -1,5 +1,7 @@
 import {
   ArrayField,
+  DataTable,
+  DateField,
   FunctionField,
   InfiniteList,
   SearchInput,
@@ -8,6 +10,8 @@ import {
 } from "react-admin";
 import { CustomReferenceInput } from "../../custom_components/CustomReferenceInput.tsx";
 import { Chip } from "@mui/material";
+
+import { useMediaQuery, Theme } from "@mui/material";
 
 const filters = [
   <CustomReferenceInput
@@ -31,39 +35,76 @@ const filters = [
   />,
 ];
 
-export const JournalList = () => (
-  <InfiniteList
-    filters={filters}
-    sort={{ field: "journal_number", order: "DESC" }}
-    queryOptions={{ meta: { embed: ["journal_entries(*, accounts(*))"] } }}
-  >
-    <SimpleList
-      primaryText={(record) =>
-        `#${record.journal_number} - ${record.description}`
-      }
-      secondaryText={(record) => `${record.date} | ${record.statement}`}
-      tertiaryText={() => (
-        <ArrayField source="journal_entries">
-          <SingleFieldList linkType={false}>
-            <FunctionField
-              render={(record) => (
-                <Chip
-                  label={`${record.accounts.name} L.${record.amount}`}
-                  sx={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    "& .MuiChip-label": {
-                      display: "block",
-                      whiteSpace: "normal",
-                      wordBreak: "break-word",
-                    },
-                  }}
+export const JournalList = () => {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm"),
+  );
+
+  return (
+    <InfiniteList
+      filters={filters}
+      sort={{ field: "journal_number", order: "DESC" }}
+      queryOptions={{ meta: { embed: ["journal_entries(*, accounts(*))"] } }}
+    >
+      {isMobile ? (
+        <SimpleList
+          primaryText={(record) =>
+            `#${record.journal_number} - ${record.description}`
+          }
+          secondaryText={(record) => `${record.date} | ${record.statement}`}
+          tertiaryText={() => (
+            <ArrayField source="journal_entries">
+              <SingleFieldList linkType={false}>
+                <FunctionField
+                  render={(record) => (
+                    <Chip
+                      label={`${record.accounts.name} L.${record.amount}`}
+                      sx={{
+                        maxWidth: "100%",
+                        height: "auto",
+                        "& .MuiChip-label": {
+                          display: "block",
+                          whiteSpace: "normal",
+                          wordBreak: "break-word",
+                        },
+                      }}
+                    />
+                  )}
                 />
-              )}
-            />
-          </SingleFieldList>
-        </ArrayField>
+              </SingleFieldList>
+            </ArrayField>
+          )}
+        />
+      ) : (
+        <DataTable>
+          <DataTable.Col
+            source="journal_number"
+            label="Número de partida"
+            sx={{ width: "10%" }}
+          />
+          <DataTable.Col source="date" label="Fecha" sx={{ width: "10%" }}>
+            <DateField source="date" />
+          </DataTable.Col>
+          <DataTable.Col source="description" label="Descripción" />
+          <DataTable.Col label="Líneas de partida" onClick={() => {}}>
+            <ArrayField source="journal_entries">
+              <SimpleList
+                primaryText={(record) => record.description}
+                // secondaryText={(record) => record.amount}
+                tertiaryText={(record) => `${record.side} - ${record.amount}`}
+                rowClick={(id) => {
+                  return `/journal_entries/${id}/show`;
+                }}
+                sx={{ padding: 0 }}
+                rowSx={() => ({
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                })}
+              />
+            </ArrayField>
+          </DataTable.Col>
+        </DataTable>
       )}
-    />
-  </InfiniteList>
-);
+    </InfiniteList>
+  );
+};

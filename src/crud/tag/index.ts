@@ -8,6 +8,7 @@ import Sell from '@mui/icons-material/Sell'
 
 export default {
 	name: "tags",
+  options: {label: 'Propósitos'},
 	icon: Sell,
 	list: TagList,
 	edit: TagEdit,

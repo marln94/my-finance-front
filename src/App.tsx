@@ -21,7 +21,7 @@ import Budgets from "./crud/budget";
 import BudgetCategories from "./crud/budget_category";
 import BudgetEntries from "./crud/budget_entry";
 import Transactions from "./crud/transaction";
-
+import TagAccounts from "./crud/tag_accounts";
 const auth0 = new Auth0Client({
   domain: import.meta.env.VITE_AUTH0_DOMAIN,
   clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
@@ -57,6 +57,7 @@ export const App = () => (
       <Resource {...JournalEntry} />
       <Resource {...Accounts} />
       <Resource {...Tags} />
+      <Resource {...TagAccounts} />
       <Resource {...Banks} />
       <Resource {...CreditCards} />
       <Resource {...UsdExchangeRates} />
