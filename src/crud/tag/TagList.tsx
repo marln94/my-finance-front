@@ -1,13 +1,21 @@
 import {
   BooleanField,
+  CreateButton,
   DataTable,
   InfiniteList,
   ReferenceArrayField,
   ShowButton,
+  TopToolbar,
 } from "react-admin";
 
+const ListActions = () => (
+  <TopToolbar>
+    <CreateButton resource="tags"/>
+  </TopToolbar>
+);
+
 export const TagList = () => (
-  <InfiniteList resource="tag_accounts_ra">
+  <InfiniteList resource="tag_accounts_ra" actions={<ListActions/>}>
     <DataTable>
       <DataTable.Col source="name" />
       <DataTable.Col source="description" />
