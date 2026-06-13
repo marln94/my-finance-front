@@ -103,6 +103,9 @@ export const JournalEntryList = () => {
           <DataTable.Col source="account_id">
             <ReferenceField reference="accounts" source="account_id" />
           </DataTable.Col>
+          <DataTable.Col source="tag_id">
+            <ReferenceField reference="tags" source="tag_id" />
+          </DataTable.Col>
           <DataTable.Col
             label="Debe"
             render={(record) => (record.side === "debe" ? record.amount : "")}
