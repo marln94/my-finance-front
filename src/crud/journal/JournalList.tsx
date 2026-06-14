@@ -89,8 +89,7 @@ export const JournalList = () => {
           <DataTable.Col label="Líneas de partida" onClick={() => {}}>
             <ArrayField source="journal_entries">
               <SimpleList
-                primaryText={(record) => record.description}
-                // secondaryText={(record) => record.amount}
+                primaryText={(record) => record.accounts.name}
                 tertiaryText={(record) => `${record.side} - ${record.amount}`}
                 rowClick={(id) => {
                   return `/journal_entries/${id}/show`;
