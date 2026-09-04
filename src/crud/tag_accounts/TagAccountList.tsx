@@ -1,11 +1,10 @@
-import { DataTable, InfiniteList, ReferenceField } from "react-admin";
+import { DataTable, FunctionField, InfiniteList, ReferenceField } from "react-admin";
 
 export const TagAccountList = () => (
-  <InfiniteList>
+  <InfiniteList sort={{ field: "tags(name)", order: "ASC" }} queryOptions={{ meta: { embed: ["tags"] } }}>
     <DataTable>
-      <DataTable.Col source="id" />
-      <DataTable.Col source="tag_id" label="Propósito">
-        <ReferenceField reference={"tags"} source={"tag_id"} />
+      <DataTable.Col source="tags(name)" label="Propósito">
+        <FunctionField render={(record) => record?.tags?.name} />
       </DataTable.Col>
       <DataTable.Col source="account_id" label="Cuenta">
         <ReferenceField reference={"accounts"} source={"account_id"} />

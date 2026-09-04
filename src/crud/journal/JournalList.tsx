@@ -85,6 +85,7 @@ export const JournalList = () => {
           <DataTable.Col source="date" label="Fecha" sx={{ width: "10%" }}>
             <DateField source="date" />
           </DataTable.Col>
+          <DataTable.Col source="transaction_id"/>
           <DataTable.Col source="description" label="Descripción" />
           <DataTable.Col label="Líneas de partida" onClick={() => {}}>
             <ArrayField source="journal_entries">
